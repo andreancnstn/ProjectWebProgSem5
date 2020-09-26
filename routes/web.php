@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/home-pizza', 'PizzaController@index')->name('home_pizza');
+Route::get('/create-pizza', 'PizzaController@create')->name('create_pizza');
+Route::get('/edit-pizza/{id}', 'PizzaController@edit')->name('edit_pizza');
+Route::post('/store-pizza', 'PizzaController@store')->name('store_pizza');
+Route::post('/update-pizza/{id}', 'PizzaController@update')->name('update_pizza');
+

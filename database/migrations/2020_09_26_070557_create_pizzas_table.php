@@ -18,7 +18,7 @@ class CreatePizzasTable extends Migration
             $table->string('pizza_name');
             $table->bigInteger('price');
             $table->string('desc');
-            $table->string('pic');
+            $table->string('image');
             $table->timestamps();
         });
     }

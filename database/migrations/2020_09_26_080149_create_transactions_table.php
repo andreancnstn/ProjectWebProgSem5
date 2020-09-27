@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('price');
             $table->integer('qty');
             $table->bigInteger('total_price');
+            $table->string('image');
             $table->timestamps();
         });
     }

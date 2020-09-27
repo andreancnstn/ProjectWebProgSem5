@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
+use App\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -11,9 +13,11 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
-        //
+        $transacs = Transaction::where('user_id', $user_id)->get();
+
+        return view('transaction.history', compact('transacs'));
     }
 
     /**
@@ -32,9 +36,25 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $user_id)
     {
-        //
+        $carts = Cart::where('user_id', $user_id);
+
+        foreach($carts as $cart) {
+            $total_price = $cart->qty * $cart->price;
+            Transaction::create(array_merge(
+                ['user_id' => $user_id],
+                ['pizza_name' => $cart->pizza_name],
+                ['price' => $cart->price],
+                ['qty' => $cart->qty],
+                ['total_price' => $total_price],
+                ['image' => $cart->image],
+            ));
+        }
+
+        $carts->delete();
+
+        return redirect()->route('home_pizza');
     }
 
     /**
@@ -43,9 +63,13 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($time)
     {
-        //
+        $transacs = Transaction::where('created_at', $time)->get();
+
+        // dd($transacs);
+
+        return view('transaction.detail', compact('transacs'));
     }
 
     /**

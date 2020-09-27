@@ -9,4 +9,9 @@ class Pizza extends Model
     protected $fillable = [
         'pizza_name', 'price', 'desc', 'image'
     ];
+
+    public function cart()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
 }

@@ -6,6 +6,7 @@ use App\Cart;
 use App\Pizza;
 use ArrayObject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -18,17 +19,9 @@ class CartController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $carts = Cart::all();
-        $carts = $carts->where('user_id', '=', $user_id);
+        $carts = Cart::where('user_id', $user_id)->get();
 
-        $pizzas = new ArrayObject();
-
-        foreach($carts as $value) {
-            $x = Pizza::where('pizza_name', '=', $value->pizza_name);
-            $pizzas->append($x);
-        }
-
-        return view('cart.view', compact('carts', 'pizzas'));
+        return view('cart.view', compact('carts'));
     }
 
     /**
@@ -49,6 +42,10 @@ class CartController extends Controller
      */
     public function store(Request $request, $pizza_id)
     {
+        $pizza = Pizza::where('id', $pizza_id)->get()->first();
+
+        // dd($pizza);
+
         $data = $this->validate($request, [
             'qty' => 'required',
         ]);
@@ -56,7 +53,9 @@ class CartController extends Controller
         Cart::create(array_merge(
             $data,
             ['user_id' => auth()->user()->id],
-            ['pizza_id' => $pizza_id],
+            ['pizza_name' => $pizza->pizza_name],
+            ['price' => $pizza->price],
+            ['image' => $pizza->image],
         ));
 
         return redirect()->route('home_pizza');
@@ -93,7 +92,17 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cart = Cart::find($id);
+
+        $data = $this->validate($request, [
+            'qty' => 'required',
+        ]);
+
+        $cart->update(array_merge(
+            $data
+        ));
+
+        return redirect()->route('view_cart');
     }
 
     /**
@@ -104,6 +113,12 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
+        // $carts = Cart::where('user_id', '=', $id)->get();
         
+        // foreach($carts as $cart) {
+        //     $cart->delete();
+        // }
+
+        // return redirect()->route('view_cart');
     }
 }

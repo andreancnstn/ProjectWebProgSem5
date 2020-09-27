@@ -30,5 +30,13 @@ Route::post('/store-pizza', 'PizzaController@store')->name('store_pizza');
 Route::post('/update-pizza/{id}', 'PizzaController@update')->name('update_pizza');
 Route::get('/delete-pizza/{id}', 'PizzaController@destroy')->name('delete_pizza');
 
-Route::post('/add-to-cart/{id}', 'CartController@store')->name('add_cart');
+Route::post('/add-to-cart/{pizza_id}}', 'CartController@store')->name('add_cart');
+Route::post('/update-cart/{id}', 'CartController@update')->name('update_cart');
+Route::get('/view-cart', 'CartController@index')->name('view_cart');
+// Route::get('/destroy-cart/{user_id}', 'CartController@destroy')->name('destroy_cart');
+
+Route::post('/add-transac/{user_id}', 'TransactionController@store')->name('add_transac');
+Route::get('/view-transac/{user_id}', 'TransactionController@index')->name('view_transac');
+Route::get('/view-transac-detail/{created_time}', 'TransactionController@show')->name('view_transac_detail');
+
 

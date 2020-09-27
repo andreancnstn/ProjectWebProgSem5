@@ -111,7 +111,8 @@ class PizzaController extends Controller
             'price' => 'required|numeric|min:5',
             'image' => 'required|file|mimes:jpeg,jpg,png'
         ]);
-
+        
+        //make if klo ada foto atau engk
         $image_path = $request->image->store('image', 'public');
 
         $pizza->update(array_merge(

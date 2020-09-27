@@ -30,5 +30,5 @@ Route::post('/store-pizza', 'PizzaController@store')->name('store_pizza');
 Route::post('/update-pizza/{id}', 'PizzaController@update')->name('update_pizza');
 Route::get('/delete-pizza/{id}', 'PizzaController@destroy')->name('delete_pizza');
 
-Route::post('/add-to-cart', 'CartController@store')->name('add_cart');
+Route::post('/add-to-cart/{id}', 'CartController@store')->name('add_cart');
 

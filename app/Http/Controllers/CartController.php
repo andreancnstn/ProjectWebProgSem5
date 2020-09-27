@@ -47,22 +47,16 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $pizza_id)
     {
-        //send request use javascript via string param
-        //can be change through the course - basic dumb design
-        $user_id = auth()->user()->id;
-        $pizza_name = $request->get('pizza_name');
-        $price = $request->get('price');
-        $qty = $request->get('qty');
-        $image = $request->get('image');
+        $data = $this->validate($request, [
+            'qty' => 'required',
+        ]);
 
         Cart::create(array_merge(
-            ['user_id' => $user_id],
-            ['pizza_name' => $pizza_name],
-            ['pizza_price' => $price],
-            ['qty' => $qty],
-            ['image' => $image],
+            $data,
+            ['user_id' => auth()->user()->id],
+            ['pizza_id' => $pizza_id],
         ));
 
         return redirect()->route('home_pizza');

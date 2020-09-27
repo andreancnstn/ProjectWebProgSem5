@@ -12,11 +12,22 @@ class PizzaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    //add Request $request for search and if 
+    public function index(Request $request)
     {
-        $pizzas = Pizza::all();
+        //use if when search is used
+        
+            $pizza_name = $request->get('pizza_name');
 
-        return view('pizza.index');
+            $pizzas = Pizza::all();
+
+            if($pizza_name != '') {
+                $pizzas = $pizzas->where('pizza_name', '=', $pizza_name);
+            }
+
+        // dd($pizzas);
+
+        return view('pizza.index', compact('pizzas'));
     }
 
     /**
@@ -52,7 +63,7 @@ class PizzaController extends Controller
             ['image' => $image_path]
         ));
 
-        return redirect('/home-pizza');
+        return redirect()->route('home_pizza');
     }
 
     /**
@@ -63,9 +74,9 @@ class PizzaController extends Controller
      */
     public function show($id)
     {
-        $data = Pizza::findOrFail($id);
+        $pizza = Pizza::findOrFail($id);
 
-        return view('pizza.edit', compact('data'));
+        return view('pizza.detail', compact('pizza'));
     }
 
     /**
@@ -76,11 +87,11 @@ class PizzaController extends Controller
      */
     public function edit($id)
     {
-        $data = Pizza::findOrFail($id);
+        $pizza = Pizza::findOrFail($id);
 
-        // dd($data);
+        // dd($pizza);
 
-        return view('pizza.edit', compact('data'));
+        return view('pizza.edit', compact('pizza'));
     }
 
     /**
@@ -108,7 +119,7 @@ class PizzaController extends Controller
             ['image' => $image_path]
         ));
 
-        return redirect('/home-pizza');
+        return redirect()->route('home_pizza');
     }
 
     /**
@@ -122,6 +133,6 @@ class PizzaController extends Controller
         $pizza = Pizza::find($id);
         $pizza->delete();
 
-        return redirect('/home-pizza');
+        return redirect()->route('home_pizza');
     }
 }

@@ -19,6 +19,7 @@ class CreateCartsTable extends Migration
             $table->string('pizza_name');
             $table->bigInteger('pizza_price');
             $table->integer('qty');
+            $table->string('image');
             $table->timestamps();
         });
     }

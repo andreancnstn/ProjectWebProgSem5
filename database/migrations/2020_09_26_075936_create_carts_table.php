@@ -16,10 +16,8 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('pizza_name');
-            $table->bigInteger('pizza_price');
+            $table->unsignedBigInteger('pizza_id');
             $table->integer('qty');
-            $table->string('image');
             $table->timestamps();
         });
     }

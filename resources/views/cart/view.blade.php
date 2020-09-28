@@ -13,11 +13,8 @@
     </form>
     @endforeach
 
-    {{-- <a href="{{ route('add_transac', auth()->user()->id)}}"> --}}
     <form action="{{ route('add_transac', auth()->user()->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
-        {{-- @method('post') --}}
         <button>Check Out</button>
     </form>
-    {{-- </a> --}}
 @endsection

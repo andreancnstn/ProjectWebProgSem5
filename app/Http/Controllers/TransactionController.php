@@ -45,7 +45,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request, $user_id)
     {
-        $carts = Cart::where('user_id', $user_id);
+        $carts = Cart::where('user_id', $user_id)->get();
 
         foreach($carts as $cart) {
             $total_price = $cart->qty * $cart->price;
@@ -59,7 +59,7 @@ class TransactionController extends Controller
             ));
         }
 
-        // return redirect()->route('destroy_all_cart', $user_id)->with('success');
+        return redirect()->route('destroy_all_cart', $user_id)->with('success');
     }
 
     /**

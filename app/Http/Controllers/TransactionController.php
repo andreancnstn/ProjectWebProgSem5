@@ -20,6 +20,13 @@ class TransactionController extends Controller
         return view('transaction.history', compact('transacs'));
     }
 
+    public function showAllTransac()
+    {
+        $transacs = Transaction::all();
+
+        return view('transaction.viewAll', compact('transacs'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,9 +59,7 @@ class TransactionController extends Controller
             ));
         }
 
-        $carts->delete();
-
-        return redirect()->route('home_pizza');
+        // return redirect()->route('destroy_all_cart', $user_id)->with('success');
     }
 
     /**

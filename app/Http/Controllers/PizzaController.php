@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pizza;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PizzaController extends Controller
 {
@@ -15,17 +16,19 @@ class PizzaController extends Controller
     //add Request $request for search and if 
     public function index(Request $request)
     {
-        //use if when search is used
-        
-            $pizza_name = $request->get('pizza_name');
+        $pizza_name = $request->get('pizza_name');
 
-            $pizzas = Pizza::all();
+        $pizzas = Pizza::all();
 
-            if($pizza_name != '') {
-                $pizzas = $pizzas->where('pizza_name', '=', $pizza_name);
-            }
+        if($pizza_name != '') {
+            $pizzas = $pizzas->where('pizza_name', $pizza_name);
+        }
+        else if($pizza_name == 'all') {
+            
+        }
 
-        // dd($pizzas);
+        //fix search method (still not working)
+        // dd($pizzas, $request);
 
         return view('pizza.index', compact('pizzas'));
     }
@@ -52,8 +55,8 @@ class PizzaController extends Controller
         $data = $this->validate($request, [
             'pizza_name' => 'required|max:20',
             'desc' => 'required|min:20',
-            'price' => 'required|numeric|min:5',
-            'image' => 'required|file|mimes:jpeg,jpg,png'
+            'price' => 'required|numeric|gt:10000',
+            'image' => 'required|file|image'
         ]);
 
         $image_path = $request->image->store('image', 'public');
@@ -108,8 +111,8 @@ class PizzaController extends Controller
         $data = $this->validate($request, [
             'pizza_name' => 'required|max:20',
             'desc' => 'required|min:20',
-            'price' => 'required|numeric|min:5',
-            'image' => 'required|file|mimes:jpeg,jpg,png'
+            'price' => 'required|numeric|gt:10000',
+            'image' => 'required|file|image'
         ]);
         
         //make if klo ada foto atau engk
@@ -132,6 +135,7 @@ class PizzaController extends Controller
     public function destroy($id)
     {
         $pizza = Pizza::find($id);
+        Storage::delete('public/'.$pizza->image);
         $pizza->delete();
 
         return redirect()->route('home_pizza');

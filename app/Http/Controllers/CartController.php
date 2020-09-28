@@ -58,7 +58,7 @@ class CartController extends Controller
             ['image' => $pizza->image],
         ));
 
-        return redirect()->route('home_pizza');
+        return redirect()->route('home_pizza', 'all');
     }
 
     /**
@@ -111,14 +111,22 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyAllCart($user_id)
     {
-        // $carts = Cart::where('user_id', '=', $id)->get();
+        $carts = Cart::where('user_id', '=', $user_id)->get();
         
-        // foreach($carts as $cart) {
-        //     $cart->delete();
-        // }
+        foreach($carts as $cart) {
+            $cart->delete();
+        }
 
-        // return redirect()->route('view_cart');
+        return redirect()->route('home_pizza', 'all');
+    }
+
+    public function destroyperid($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+
+        return redirect()->route('view_cart');
     }
 }

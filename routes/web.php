@@ -19,10 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/home-pizza', 'PizzaController@index')->name('home_pizza');
+Route::get('/home-pizza/{pizza_name}', 'PizzaController@index')->name('home_pizza');
 Route::get('/create-pizza', 'PizzaController@create')->name('create_pizza');
 Route::get('/edit-pizza/{id}', 'PizzaController@edit')->name('edit_pizza');
 Route::get('/detail-pizza/{id}', 'PizzaController@show')->name('show_pizza');
@@ -33,9 +33,11 @@ Route::get('/delete-pizza/{id}', 'PizzaController@destroy')->name('delete_pizza'
 Route::post('/add-to-cart/{pizza_id}}', 'CartController@store')->name('add_cart');
 Route::post('/update-cart/{id}', 'CartController@update')->name('update_cart');
 Route::get('/view-cart', 'CartController@index')->name('view_cart');
-// Route::get('/destroy-cart/{user_id}', 'CartController@destroy')->name('destroy_cart');
+Route::get('/destroy-all-cart/{user_id}', 'CartController@destroyAllCart')->name('destroy_all_cart');
+Route::get('/destroy-cart/{id}', 'CartController@destroyperid')->name('destroy_cart');
 
 Route::post('/add-transac/{user_id}', 'TransactionController@store')->name('add_transac');
+Route::get('/view-transac-all', 'TransactionController@viewAllTransac')->name('view_transac_all');
 Route::get('/view-transac/{user_id}', 'TransactionController@index')->name('view_transac');
 Route::get('/view-transac-detail/{created_time}', 'TransactionController@show')->name('view_transac_detail');
 

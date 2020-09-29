@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pizza;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,21 +17,36 @@ class PizzaController extends Controller
     //add Request $request for search and if 
     public function index(Request $request)
     {
-        $pizza_name = $request->get('pizza_name');
+        if(Auth::check()) {
+            $pizza_name = $request->get('pizza_name');
 
-        $pizzas = Pizza::all();
+            $pizzas = Pizza::all();
 
-        if($pizza_name != '') {
-            $pizzas = $pizzas->where('pizza_name', $pizza_name);
+            if($pizza_name != '') {
+                $pizzas = Pizza::where('pizza_name', $pizza_name)->get();
+            }
+            else if($pizza_name == 'all') {
+                
+            }
+            // dd($pizzas, $request);
+
+            return view('pizza.index', compact('pizzas'));
         }
-        else if($pizza_name == 'all') {
-            
+        else {
+            $pizza_name = $request->get('pizza_name');
+
+            $pizzas = Pizza::all();
+
+            if($pizza_name != '') {
+                $pizzas = Pizza::where('pizza_name', $pizza_name)->get();
+            }
+            else if($pizza_name == 'all') {
+                
+            }
+            // dd($pizzas, $request);
+
+            return view('pizza.index', compact('pizzas'));
         }
-
-        //fix search method (still not working)
-        // dd($pizzas, $request);
-
-        return view('pizza.index', compact('pizzas'));
     }
 
     /**
@@ -66,7 +82,7 @@ class PizzaController extends Controller
             ['image' => $image_path]
         ));
 
-        return redirect()->route('home_pizza');
+        return redirect()->route('home_pizza', 'all');
     }
 
     /**
@@ -123,7 +139,7 @@ class PizzaController extends Controller
             ['image' => $image_path]
         ));
 
-        return redirect()->route('home_pizza');
+        return redirect()->route('home_pizza', 'all');
     }
 
     /**
@@ -138,6 +154,6 @@ class PizzaController extends Controller
         Storage::delete('public/'.$pizza->image);
         $pizza->delete();
 
-        return redirect()->route('home_pizza');
+        return redirect()->route('home_pizza', 'all');
     }
 }

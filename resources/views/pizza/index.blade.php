@@ -2,7 +2,6 @@
 
 @section('content')
     @foreach ($pizzas as $pizza)
-
     <div class="container">
         <div class="row">
             <div class="col-6 offset-3">
@@ -21,15 +20,16 @@
                         </a>
                     </span> Rp.{{ $pizza->price }}
                     </p>
-                    @if (Auth::user()->role == 'admin')
-                    <a href="/edit-pizza/{{ $pizza->id }}">
-                        <button>Update Pizza</button>
-                    </a>
-                    <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">
-                        @csrf 
-                        @method('DELETE')
-                        <button>Delete Pizza</button>
-                    </form>
+                    @if (Auth::user())
+                        @if (Auth::user()->role == 'admin')
+                            <a href="/edit-pizza/{{ $pizza->id }}">
+                                <button>Update Pizza</button>
+                            </a>
+                            <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">
+                                @csrf
+                                <button>Delete Pizza</button>
+                            </form>
+                        @endif
                     @endif
                 </div>
             </div>

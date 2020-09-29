@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//act as homepage
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home_pizza', 'all');
 });
 
 Auth::routes();
@@ -28,7 +29,7 @@ Route::get('/edit-pizza/{id}', 'PizzaController@edit')->name('edit_pizza');
 Route::get('/detail-pizza/{id}', 'PizzaController@show')->name('show_pizza');
 Route::post('/store-pizza', 'PizzaController@store')->name('store_pizza');
 Route::post('/update-pizza/{id}', 'PizzaController@update')->name('update_pizza');
-Route::get('/delete-pizza/{id}', 'PizzaController@destroy')->name('delete_pizza');
+Route::post('/delete-pizza/{id}', 'PizzaController@destroy')->name('delete_pizza');
 
 Route::post('/add-to-cart/{pizza_id}}', 'CartController@store')->name('add_cart');
 Route::post('/update-cart/{id}', 'CartController@update')->name('update_cart');
@@ -41,4 +42,4 @@ Route::get('/view-transac-all', 'TransactionController@viewAllTransac')->name('v
 Route::get('/view-transac/{user_id}', 'TransactionController@index')->name('view_transac');
 Route::get('/view-transac-detail/{created_time}', 'TransactionController@show')->name('view_transac_detail');
 
-
+Route::get('/view-users', 'UserController@index')->name('view_users');

@@ -22,8 +22,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md shadow-sm"style="background-color:   #d51c1c   ;">
+            <div class="container" >
                 <a class="navbar-brand d-flex" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     <div> <img src="/icons/pizza_logo.png"  width="30px" style="height:25px"> </div>
@@ -40,7 +40,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" style="text-emphasis-color: #00000;">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

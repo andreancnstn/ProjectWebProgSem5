@@ -5,8 +5,8 @@
     <form action="{{ route('update_cart', $cart->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         user_id = {{ $cart->user_id }}
-        pizza_name = {{ $cart->pizza_name }}
-        <img src="storage/{{$cart->image}}">
+        pizza_name = {{ $pizzas->where('id', $cart->pizza_id)->first()->pizza_name }}
+        <img src="storage/{{ $pizzas->where('id', $cart->pizza_id)->first()->image }}">
         qty = {{ $cart->qty }}
         qty <input type="text" id="qty" name="qty">
         <button>update cart</button>

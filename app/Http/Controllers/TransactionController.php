@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Pizza;
 use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -18,13 +20,6 @@ class TransactionController extends Controller
         $transacs = Transaction::where('user_id', $user_id)->get();
 
         return view('transaction.history', compact('transacs'));
-    }
-
-    public function showAllTransac()
-    {
-        $transacs = Transaction::all();
-
-        return view('transaction.viewAll', compact('transacs'));
     }
 
     /**
@@ -51,11 +46,9 @@ class TransactionController extends Controller
             $total_price = $cart->qty * $cart->price;
             Transaction::create(array_merge(
                 ['user_id' => $user_id],
-                ['pizza_name' => $cart->pizza_name],
-                ['price' => $cart->price],
+                ['pizza_id' => $cart->pizza_id],
                 ['qty' => $cart->qty],
-                ['total_price' => $total_price],
-                ['image' => $cart->image],
+                ['total_price' => $total_price]
             ));
         }
 
@@ -71,10 +64,19 @@ class TransactionController extends Controller
     public function show($time)
     {
         $transacs = Transaction::where('created_at', $time)->get();
+        $pizzas = Pizza::all();
 
         // dd($transacs);
 
-        return view('transaction.detail', compact('transacs'));
+        return view('transaction.detail', compact('transacs', 'pizzas'));
+    }
+
+    public function showAllTransac()
+    {
+        $transacs = Transaction::all();
+        $users = User::all();
+
+        return view('transaction.viewAll', compact('transacs', 'users'));
     }
 
     /**

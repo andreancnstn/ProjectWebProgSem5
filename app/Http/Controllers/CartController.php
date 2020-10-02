@@ -20,8 +20,9 @@ class CartController extends Controller
         $user_id = auth()->user()->id;
 
         $carts = Cart::where('user_id', $user_id)->get();
+        $pizzas = Pizza::all();
 
-        return view('cart.view', compact('carts'));
+        return view('cart.view', compact('carts', 'pizzas'));
     }
 
     /**
@@ -42,20 +43,26 @@ class CartController extends Controller
      */
     public function store(Request $request, $pizza_id)
     {
-        $pizza = Pizza::where('id', $pizza_id)->get()->first();
+        // $pizza = Pizza::where('id', $pizza_id)->get()->first();
 
         // dd($pizza);
 
         $data = $this->validate($request, [
-            'qty' => 'required',
+            'qty' => 'required|gt:0',
         ]);
 
-        Cart::create(array_merge(
+        // Cart::create(array_merge(
+        //     $data,
+        //     ['user_id' => auth()->user()->id],
+        //     ['pizza_name' => $pizza->pizza_name],
+        //     ['price' => $pizza->price],
+        //     ['image' => $pizza->image],
+        // ));
+
+        auth()->user()->cart()->create(array_merge(
             $data,
             ['user_id' => auth()->user()->id],
-            ['pizza_name' => $pizza->pizza_name],
-            ['price' => $pizza->price],
-            ['image' => $pizza->image],
+            ['pizza_id' => $pizza_id],
         ));
 
         return redirect()->route('home_pizza', 'all');
@@ -98,7 +105,7 @@ class CartController extends Controller
             'qty' => 'required',
         ]);
 
-        $cart->update(array_merge(
+        auth()->user()->cart()->update(array_merge(
             $data
         ));
 

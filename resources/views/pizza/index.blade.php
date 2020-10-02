@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6 offset-3">
-                <a href="/detail-pizza/{{ $pizza->id }}">
+                <a href="{{ route('show_pizza' , $pizza->id) }}">
                     <img src="/storage/{{ $pizza->image }}" class="w-100">
                 </a>
             </div>
@@ -15,14 +15,14 @@
                 <div>
                     <p>
                     <span class="font-weight-bold">
-                        <a href="/detail-pizza/{{ $pizza->id }}">
+                        <a href="{{ route('show_pizza' , $pizza->id) }}">
                             <span class="text-dark">{{ $pizza->pizza_name }}</span>
                         </a>
                     </span> Rp.{{ $pizza->price }}
                     </p>
                     @if (Auth::user())
                         @if (Auth::user()->role == 'admin')
-                            <a href="/edit-pizza/{{ $pizza->id }}">
+                            <a href="{{ route('edit_pizza' , $pizza->id) }}">
                                 <button>Update Pizza</button>
                             </a>
                             <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">

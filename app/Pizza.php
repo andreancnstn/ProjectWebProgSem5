@@ -10,7 +10,7 @@ class Pizza extends Model
         'pizza_name', 'price', 'desc', 'image'
     ];
 
-    public function cart()
+    public function carts()
     {
         return $this->belongsToMany(Cart::class);
     }

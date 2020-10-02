@@ -1,0 +1,7 @@
+txt ini menandakan kamu sedang berada di branchnya wandira
+
+======
+
+Catatan
+1. folder vendor ga ke push ke github. tiap habis clone harus install composer
+https://stackoverflow.com/questions/38711272/why-is-vendor-package-not-pushing-to-github-even-when-vendor-is-not-listed-in

@@ -22,12 +22,12 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm"style="background-color:   #d51c1c   ;">
+        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #d51c1c;">
             <div class="container" >
                 <a class="navbar-brand d-flex" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     <div> <img src="/icons/pizza_logo.png"  width="30px" style="height:25px"> </div>
-                    <div class="pl-2"> Phizza Hut </div>
+                    <div class="pl-2 text-black-50"> Phizza Hut </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -40,31 +40,31 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto" style="text-emphasis-color: #00000;">
+                    <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link text-black-50" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link text-black-50" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('view_transac', Auth::user()->id) }}">{{ __('VIEW TRANSACTION') }}</a>
+                                    <a class="nav-link text-black-50" href="{{ route('view_transac', Auth::user()->id) }}">{{ __('View Transaction') }}</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('view_cart') }}">{{ __('VIEW CART') }}</a>    
+                                    <a class="nav-link text-black-50" href="{{ route('view_cart') }}">{{ __('View Cart') }}</a>    
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-black-50" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-black-50" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

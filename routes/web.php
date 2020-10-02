@@ -22,24 +22,31 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
+Route::prefix('pizza')->group(function() {
+    Route::get('/home/{pizza_name}', 'PizzaController@index')->name('home_pizza');
+    Route::get('/create', 'PizzaController@create')->name('create_pizza');
+    Route::get('/edit/{id}', 'PizzaController@edit')->name('edit_pizza');
+    Route::get('/detail/{id}', 'PizzaController@show')->name('show_pizza');
+    Route::post('/store', 'PizzaController@store')->name('store_pizza');
+    Route::post('/update/{id}', 'PizzaController@update')->name('update_pizza');
+    Route::post('/delete/{id}', 'PizzaController@destroy')->name('delete_pizza');
+});
 
-Route::get('/home-pizza/{pizza_name}', 'PizzaController@index')->name('home_pizza');
-Route::get('/create-pizza', 'PizzaController@create')->name('create_pizza');
-Route::get('/edit-pizza/{id}', 'PizzaController@edit')->name('edit_pizza');
-Route::get('/detail-pizza/{id}', 'PizzaController@show')->name('show_pizza');
-Route::post('/store-pizza', 'PizzaController@store')->name('store_pizza');
-Route::post('/update-pizza/{id}', 'PizzaController@update')->name('update_pizza');
-Route::post('/delete-pizza/{id}', 'PizzaController@destroy')->name('delete_pizza');
-
-Route::post('/add-to-cart/{pizza_id}}', 'CartController@store')->name('add_cart');
-Route::post('/update-cart/{id}', 'CartController@update')->name('update_cart');
+Route::prefix('cart')->group(function() {
+    Route::post('/store/{pizza_id}}', 'CartController@store')->name('add_cart');
+    Route::post('/update/{id}', 'CartController@update')->name('update_cart');
+    Route::get('/destroy-all/{user_id}', 'CartController@destroyAllCart')->name('destroy_all_cart');
+    Route::get('/destroy/{id}', 'CartController@destroyperid')->name('destroy_cart');
+});
 Route::get('/view-cart', 'CartController@index')->name('view_cart');
-Route::get('/destroy-all-cart/{user_id}', 'CartController@destroyAllCart')->name('destroy_all_cart');
-Route::get('/destroy-cart/{id}', 'CartController@destroyperid')->name('destroy_cart');
 
-Route::post('/add-transac/{user_id}', 'TransactionController@store')->name('add_transac');
-Route::get('/view-transac-all', 'TransactionController@viewAllTransac')->name('view_transac_all');
-Route::get('/view-transac/{user_id}', 'TransactionController@index')->name('view_transac');
-Route::get('/view-transac-detail/{created_time}', 'TransactionController@show')->name('view_transac_detail');
+Route::prefix('transaction')->group(function() {
+    Route::post('/store/{user_id}', 'TransactionController@store')->name('add_transac');
+    Route::get('/view-all', 'TransactionController@showAllTransac')->name('view_transac_all');
+    Route::get('/view/{user_id}', 'TransactionController@index')->name('view_transac');
+    Route::get('/detail/{created_time}', 'TransactionController@show')->name('view_transac_detail');
+});
 
-Route::get('/view-users', 'UserController@index')->name('view_users');
+Route::prefix('user')->group(function() {
+    Route::get('/view', 'UserController@index')->name('view_users');
+});

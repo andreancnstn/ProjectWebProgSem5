@@ -65,7 +65,7 @@ class CartController extends Controller
             ['pizza_id' => $pizza_id],
         ));
 
-        return redirect()->route('home_pizza', 'all');
+        return redirect()->route('home_pizza');
     }
 
     /**
@@ -105,7 +105,11 @@ class CartController extends Controller
             'qty' => 'required',
         ]);
 
-        auth()->user()->cart()->update(array_merge(
+        // auth()->user()->cart()->update(array_merge(
+        //     $data
+        // ));
+
+        $cart->update(array_merge(
             $data
         ));
 
@@ -126,14 +130,14 @@ class CartController extends Controller
             $cart->delete();
         }
 
-        return redirect()->route('home_pizza', 'all');
+        return redirect()->route('home_pizza');
     }
 
     public function destroyperid($id)
     {
-        $cart = Cart::find($id);
+        $cart = Cart::findOrFail($id);
         $cart->delete();
 
-        return redirect()->route('view_cart');
+        return redirect()->route('view_cart')->with("success");
     }
 }

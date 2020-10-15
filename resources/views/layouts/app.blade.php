@@ -19,12 +19,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #d51c1c;">
+        <nav class="navbar navbar-expand-md shadow-sm bg-color-red">
             <div class="container" >
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex" href="{{ route('home_pizza') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
                     <div> <img src="/icons/pizza_logo.png"  width="30px" style="height:25px"> </div>
                     <div class="pl-2 text-black-50"> Phizza Hut </div>
@@ -85,5 +86,7 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('script')
 </body>
 </html>

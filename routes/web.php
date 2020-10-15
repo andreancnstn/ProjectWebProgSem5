@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 //act as homepage
 Route::get('/', function () {
-    return redirect()->route('home_pizza', 'all');
+    return redirect()->route('home_pizza');
 });
 
 Auth::routes();
@@ -23,7 +23,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('pizza')->group(function() {
-    Route::get('/home/{pizza_name}', 'PizzaController@index')->name('home_pizza');
+    Route::get('/home', 'PizzaController@index')->name('home_pizza');
     Route::get('/create', 'PizzaController@create')->name('create_pizza');
     Route::get('/edit/{id}', 'PizzaController@edit')->name('edit_pizza');
     Route::get('/detail/{id}', 'PizzaController@show')->name('show_pizza');
@@ -36,7 +36,7 @@ Route::prefix('cart')->group(function() {
     Route::post('/store/{pizza_id}}', 'CartController@store')->name('add_cart');
     Route::post('/update/{id}', 'CartController@update')->name('update_cart');
     Route::get('/destroy-all/{user_id}', 'CartController@destroyAllCart')->name('destroy_all_cart');
-    Route::get('/destroy/{id}', 'CartController@destroyperid')->name('destroy_cart');
+    Route::delete('/destroy/{id}', 'CartController@destroyperid')->name('destroy_cart');
 });
 Route::get('/view-cart', 'CartController@index')->name('view_cart');
 
@@ -50,3 +50,5 @@ Route::prefix('transaction')->group(function() {
 Route::prefix('user')->group(function() {
     Route::get('/view', 'UserController@index')->name('view_users');
 });
+
+Route::get('/storage/{url}', 'PizzaController@seeImage')->name('showImage');

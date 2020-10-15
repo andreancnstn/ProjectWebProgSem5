@@ -1,39 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-    @foreach ($pizzas as $pizza)
     <div class="container">
+
+    
+        @if (Auth::check())
+            @if (Auth::user()->role == 'member')
+            <form action="{{ route('home_pizza') }}" method="GET">
+                <div class="row">
+                    <div class="col-6 ml-3">
+                        <input class="form-control" type="text" name="search" id="search" placeholder="Seacrh Pizza">
+                    </div>
+                    <button class="btn-primary form-control col-sm-1">Search</button>
+                </div>
+            </form>
+            @else
+                @if (Auth::user()->role == 'admin')
+                    <a class="btn bg-color-dark-gray form-control col-sm-1 ml-3" href="{{ route('create_pizza') }}">Add Pizza</a>
+                @endif
+            @endif
+        @endif
+        @guest
+            <form action="{{ route('home_pizza') }}" method="GET">
+                <div class="row">
+                    <div class="col-6 ml-3">
+                        <input class="form-control" type="text" name="search" id="search" placeholder="Seacrh Pizza">
+                    </div>
+                    <button class="btn-primary form-control col-sm-1">Search</button>
+                </div>
+            </form>
+        @endguest
+
+
         <div class="row">
-            <div class="col-6 offset-3">
-                <a href="{{ route('show_pizza' , $pizza->id) }}">
-                    <img src="/storage/{{ $pizza->image }}" class="w-100">
-                </a>
-            </div>
-        </div>
-        <div class="row pt-2 pb-4">
-            <div class="col-6 offset-3">
-                <div>
+            @foreach ($pizzas as $pizza)
+            <div class="col-4">
+                <div class="card-body p-2 m-2">
+                    <a href="{{ route('show_pizza' , $pizza->id) }}">
+                        <img src="/storage/{{ $pizza->image }}" class="w-100">
+                    </a>
                     <p>
-                    <span class="font-weight-bold">
-                        <a href="{{ route('show_pizza' , $pizza->id) }}">
-                            <span class="text-dark">{{ $pizza->pizza_name }}</span>
-                        </a>
-                    </span> Rp.{{ $pizza->price }}
+                        <span class="font-weight-bold">
+                            <a href="{{ route('show_pizza' , $pizza->id) }}">
+                                <span class="text-dark">{{ $pizza->pizza_name }}</span><br>
+                            </a>
+                        </span> Rp.{{ $pizza->price }}
                     </p>
-                    @if (Auth::user())
+                    @if (Auth::check())
                         @if (Auth::user()->role == 'admin')
+                        <div class="row col-12">
                             <a href="{{ route('edit_pizza' , $pizza->id) }}">
-                                <button>Update Pizza</button>
+                                <button class="btn-success form-control">Update Pizza</button>
                             </a>
                             <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">
                                 @csrf
-                                <button>Delete Pizza</button>
+                                <button class="btn-danger ml-2 form-control">Delete Pizza</button>
                             </form>
+                        </div>
                         @endif
                     @endif
                 </div>
             </div>
+            @endforeach
+        </div>
+
+        <div class="ml-3">
+            {{ $pizzas->links() }}
         </div>
     </div>
-    @endforeach
+    
 @endsection

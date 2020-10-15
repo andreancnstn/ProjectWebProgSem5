@@ -1,1 +1,0 @@
-apabila file txt ini masuk ke repo online berarti wandira sudah berhasil push txt ini dari repo local wandira

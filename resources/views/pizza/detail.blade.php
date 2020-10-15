@@ -30,7 +30,7 @@
                         @if (Auth::user()->role == 'member')
                             <div class="form-group">
                                 {{-- <label>Quantity</label> --}}
-                                <input type="text" id="qty" name="qty" placeholder="Quantity" class="form-control"><br>
+                                <input type="text" id="qty" name="qty" placeholder="Quantity" class="form-control" required><br>
                                 <button class="btn-primary">add to cart</button>
                             </div>
                         @endif

@@ -18,8 +18,9 @@ class TransactionController extends Controller
     public function index($user_id)
     {
         $transacs = Transaction::where('user_id', $user_id)->get();
+        $pizzas = Pizza::all();
 
-        return view('transaction.history', compact('transacs'));
+        return view('transaction.history', compact('transacs', 'pizzas'));
     }
 
     /**
@@ -43,7 +44,8 @@ class TransactionController extends Controller
         $carts = Cart::where('user_id', $user_id)->get();
 
         foreach($carts as $cart) {
-            $total_price = $cart->qty * $cart->price;
+            $pizza_price = Pizza::where('id', $cart->pizza_id)->first()->price;
+            $total_price = $cart->qty * $pizza_price;
             Transaction::create(array_merge(
                 ['user_id' => $user_id],
                 ['pizza_id' => $cart->pizza_id],

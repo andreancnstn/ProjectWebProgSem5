@@ -122,6 +122,13 @@ class PizzaController extends Controller
         return redirect()->route('home_pizza');
     }
 
+    public function delete($id)
+    {
+        $pizza = Pizza::findOrFail($id);
+
+        return view('pizza.delete', compact('pizza'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

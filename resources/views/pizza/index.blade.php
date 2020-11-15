@@ -37,7 +37,7 @@
             <div class="col-4">
                 <div class="card-body p-2 m-2">
                     <a href="{{ route('show_pizza' , $pizza->id) }}">
-                        <img src="/storage/{{ $pizza->image }}" class="w-100">
+                        <img src="{{Storage::url($pizza->image)}}" class="w-100">
                     </a>
                     <p>
                         <span class="font-weight-bold">
@@ -52,10 +52,13 @@
                             <a href="{{ route('edit_pizza' , $pizza->id) }}">
                                 <button class="btn-success form-control">Update Pizza</button>
                             </a>
-                            <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">
+                            <a href="{{ route('delete_pizza' , $pizza->id) }}">
+                                <button class="btn-danger ml-2 form-control">Delete Pizza</button>
+                            </a>
+                            {{-- <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">
                                 @csrf
                                 <button class="btn-danger ml-2 form-control">Delete Pizza</button>
-                            </form>
+                            </form> --}}
                         </div>
                         @endif
                     @endif

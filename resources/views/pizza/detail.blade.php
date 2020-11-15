@@ -7,7 +7,7 @@
         <div class="card">
             <div class="d-flex p-3">
                 <div class="col-md-5">
-                    <img src="/storage/{{ $pizza->image }}" class="w-100">
+                    <img src="{{Storage::url($pizza->image)}}" class="w-100">
                 </div>
 
                 <div class="col-sm-4">

@@ -53,8 +53,9 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth::user()->role == 'member')
                             <li class="nav-item">
-                                    <a class="nav-link text-black-50" href="{{ route('view_transac', Auth::user()->id) }}">{{ __('View Transaction') }}</a>
+                                <a class="nav-link text-black-50" href="{{ route('view_transac', Auth::user()->id) }}">{{ __('View Transaction History') }}</a>
                             </li>
                             <li class="nav-item">
                                     <a class="nav-link text-black-50" href="{{ route('view_cart') }}">{{ __('View Cart') }}</a>    
@@ -76,6 +77,33 @@
                                     </form>
                                 </div>
                             </li>
+                            @endif
+
+                            @if (Auth::user()->role == 'admin')
+                            <li class="nav-item">
+                                <a class="nav-link text-black-50" href="{{ route('view_transac_all') }}">{{ __('View All User Transaction') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link text-black-50" href="{{ route('view_users') }}">{{ __('View All User') }}</a>    
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-black-50" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-black-50" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>

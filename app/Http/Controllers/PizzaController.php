@@ -105,7 +105,7 @@ class PizzaController extends Controller
         $pizza = Pizza::find($request->id);
 
         $data = $this->validate($request, [
-            'pizza_name' => 'required',
+            'pizza_name' => 'required|max:20',
             'desc' => 'required|min:20',
             'price' => 'required|numeric|gt:10000',
             'image' => 'nullable|file|image'

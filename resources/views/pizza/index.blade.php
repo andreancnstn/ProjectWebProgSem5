@@ -36,9 +36,13 @@
             @foreach ($pizzas as $pizza)
             <div class="col-4">
                 <div class="card-body p-2 m-2">
-                    <a href="{{ route('show_pizza' , $pizza->id) }}">
-                        <img src="{{Storage::url($pizza->image)}}" class="w-100">
-                    </a>
+
+                    <div class="pizza-img-wrapper">
+                        <a href="{{ route('show_pizza' , $pizza->id) }}">
+                            <img src="{{Storage::url($pizza->image)}}" class="w-100">
+                        </a>
+                    </div>
+                    
                     <p>
                         <span class="font-weight-bold">
                             <a href="{{ route('show_pizza' , $pizza->id) }}">

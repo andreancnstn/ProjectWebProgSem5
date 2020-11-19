@@ -6,6 +6,7 @@ use App\Cart;
 use App\Pizza;
 use App\Transaction;
 use App\User;
+use ArrayObject;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -75,8 +76,25 @@ class TransactionController extends Controller
     {
         $transacs = Transaction::all();
         $users = User::all();
+        $data = new ArrayObject();
 
-        return view('transaction.viewAll', compact('transacs', 'users'));
+        for ($i = 0; $i < count($transacs); $i ++) {
+            if($i > 0) {
+                $timeone = $transacs[$i]->created_at;
+                $timetwo = $transacs[$i - 1]->created_at;
+                if ($timeone == $timetwo) {
+                    continue;
+                }
+                else{
+                    $data->append($transacs[$i]);
+                }
+            }
+            else if($transacs[$i]->id == 1) {
+                $data->append($transacs[$i]);
+            }
+        }
+
+        return view('transaction.viewAll', compact('data','users'));
     }
 
     /**

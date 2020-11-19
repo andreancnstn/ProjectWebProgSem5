@@ -16,15 +16,11 @@ class PizzaController extends Controller
      */
     public function index(Request $request)
     {
-        // if(Auth::check()) {
-        // }
         $pizzas = Pizza::paginate(6);
 
         if($request->search != null) {
             $pizzas = Pizza::where('pizza_name', $request->search)->paginate(6);
         }
-        
-        // dd($pizzas, $request);
 
         return view('pizza.index', compact('pizzas'));
     }
@@ -47,7 +43,6 @@ class PizzaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $data = $this->validate($request, [
             'pizza_name' => 'required|max:20',
             'desc' => 'required|min:20',

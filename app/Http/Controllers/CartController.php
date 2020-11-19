@@ -43,21 +43,10 @@ class CartController extends Controller
      */
     public function store(Request $request, $pizza_id)
     {
-        // $pizza = Pizza::where('id', $pizza_id)->get()->first();
-
-        // dd($pizza);
 
         $data = $this->validate($request, [
             'qty' => 'required|gt:0',
         ]);
-
-        // Cart::create(array_merge(
-        //     $data,
-        //     ['user_id' => auth()->user()->id],
-        //     ['pizza_name' => $pizza->pizza_name],
-        //     ['price' => $pizza->price],
-        //     ['image' => $pizza->image],
-        // ));
 
         auth()->user()->cart()->create(array_merge(
             $data,
@@ -104,10 +93,6 @@ class CartController extends Controller
         $data = $this->validate($request, [
             'qty' => 'required',
         ]);
-
-        // auth()->user()->cart()->update(array_merge(
-        //     $data
-        // ));
 
         $cart->update(array_merge(
             $data

@@ -7,11 +7,11 @@ Phizza Hut | {{auth()->user()->name}}'s Transaction History
 @section('content')
 <div class="container">
     @foreach ($data as $transac)
-        <div id="transac_bar" class="card-header">
-            <a href="{{ route('view_transac_detail', $transac->created_at) }}">
-                <label class="">Transaction at {{ $transac->created_at }}</label><br>
-            </a>
-        </div>
+        <a href="{{ route('view_transac_detail', $transac->created_at) }}">
+            <div id="transac_bar" class="card-header rounded">
+                <label class="transac-history">Transaction at {{ $transac->created_at }}</label><br>
+            </div>
+        </a>
     @endforeach
 </div>
 <input id="jmlh_transac" value="{{ $data->count() }}" class="d-none">

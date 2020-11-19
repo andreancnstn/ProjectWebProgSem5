@@ -48,8 +48,12 @@ Phizza Hut | {{auth()->user()->name}}'s Cart
     @endforeach
 
     @if(count($carts) == 0)
-        <button class="btn-primary">Go To Shop</button>
-        {{-- TODO : tolong di routing gw ga ngerti caranyaaaa HUHUHUHU T___T MAAF --}}
+    <h1 class="py-5" style="text-align: center">Cart is empty <br> Please go back to home</h1>
+    <a href="/">
+        <div class="text-center">
+            <button class="btn-danger btn">Go To Home</button>
+        </div>
+    </a>
     @else
     <form action="{{ route('add_transac', auth()->user()->id) }}" enctype="multipart/form-data" method="POST">
         @csrf

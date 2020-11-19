@@ -20,8 +20,25 @@ class TransactionController extends Controller
     {
         $transacs = Transaction::where('user_id', $user_id)->get();
         $pizzas = Pizza::all();
+        $data = new ArrayObject();
 
-        return view('transaction.history', compact('transacs', 'pizzas'));
+        for ($i = 0; $i < count($transacs); $i ++) {
+            if($i > 0) {
+                $timeone = $transacs[$i]->created_at;
+                $timetwo = $transacs[$i - 1]->created_at;
+                if ($timeone == $timetwo) {
+                    continue;
+                }
+                else{
+                    $data->append($transacs[$i]);
+                }
+            }
+            else if($transacs[$i]->id == 1) {
+                $data->append($transacs[$i]);
+            }
+        }
+
+        return view('transaction.history', compact('data', 'pizzas'));
     }
 
     /**

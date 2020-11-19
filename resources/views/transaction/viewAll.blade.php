@@ -1,5 +1,8 @@
 @extends('layouts.app')
-@inject('user', 'App\User')
+
+@section('title')
+Phizza Hut | All User Transaction
+@endsection()
 
 @section('content')
     <div class="container">

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Phizza Hut | {{auth()->user()->name}}'s Cart
+@endsection()
+
 @section('content')
     @foreach ($carts as $cart)
     <div class="container">

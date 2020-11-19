@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Phizza Hut | Delete Pizza
+@endsection()
+
 @section('content')
 <form action="{{ route('destroy_pizza', $pizza->id) }}" enctype="multipart/form-data" method="POST">
     @csrf

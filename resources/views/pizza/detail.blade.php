@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Phizza Hut | {{$pizza->pizza_name}} Pizza
+@endsection()
+
 @section('content')
 <form action="{{ route('add_cart', $pizza->id) }}" enctype="multipart/form-data" method="POST">
     @csrf

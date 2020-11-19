@@ -3,6 +3,10 @@
 @section('content')
     @foreach ($transacs as $transac)
 
+    @section('title')
+    Phizza Hut | {{$transac->created_at}} Transaction Detail
+    @endsection()
+
     <div class="container">
         <div class="card m-3">
             <div class="d-flex p-3">

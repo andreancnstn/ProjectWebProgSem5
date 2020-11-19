@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Phizza Hut | Create Pizza
+@endsection()
+
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">

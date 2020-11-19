@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
-{{-- TODO : BUAT TRANSAC TIMENYA 1 AJA --}}
+@section('title')
+Phizza Hut | {{auth()->user()->name}}'s Transaction History
+@endsection()
+
 @section('content')
 <div class="container">
-    @foreach ($transacs as $transac)
+    @foreach ($data as $transac)
         <div id="transac_bar" class="card-header">
             <a href="{{ route('view_transac_detail', $transac->created_at) }}">
                 <label class="">Transaction at {{ $transac->created_at }}</label><br>
@@ -11,7 +14,7 @@
         </div>
     @endforeach
 </div>
-<input id="jmlh_transac" value="{{ $transacs->count() }}" class="d-none">
+<input id="jmlh_transac" value="{{ $data->count() }}" class="d-none">
 @endsection
 
 @section('script')

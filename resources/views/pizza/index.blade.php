@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Phizza Hut | Home
+@endsection()
+
 @section('content')
     <div class="container">
 

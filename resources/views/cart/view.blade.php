@@ -9,7 +9,7 @@ Phizza Hut | {{auth()->user()->name}}'s Cart
     <div class="container">
         <div class="card m-3">
             <div class="d-flex p-3">
-                <div class="col-md-3">
+                <div class="col-md-3" id="cart-content">
                     <img src="{{ Storage::url($pizzas->where('id', $cart->pizza_id)->first()->image) }}" class="w-100">
                 </div>
     
@@ -47,11 +47,16 @@ Phizza Hut | {{auth()->user()->name}}'s Cart
     </div>
     @endforeach
 
-    {{-- TODO : PAS ENGK ADA BARANG< JGN SHOW BUTTON INSTEAD USE TULISAN AND BUTTON REDIRECT TO SHOP --}}
+    @if(count($carts) == 0)
+        <button class="btn-primary">Go To Shop</button>
+        {{-- TODO : tolong di routing gw ga ngerti caranyaaaa HUHUHUHU T___T MAAF --}}
+    @else
     <form action="{{ route('add_transac', auth()->user()->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="container">
             <button class="btn-success m-3">Check Out</button>
         </div>
     </form>
+    @endif
+
 @endsection

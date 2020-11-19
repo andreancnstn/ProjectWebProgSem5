@@ -17,7 +17,7 @@
                 <div class="card-header"><h3>Edit Pizza</h3></div>
 
                 <div class="card-body">
-                    <form action="{{ route('store_pizza') }}" enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('update_pizza', $pizza->id) }}" enctype="multipart/form-data" method="POST">
                         @csrf
 
                         <div class="form-group row">
@@ -49,9 +49,9 @@
 
                             <div class="col-md-6">
                                 @if ($pizza->image != null)
-                                    <a class="btn-warning form-control" type="hidden" target="_blank" href="{{ route('showImage', $pizza->image) }}">Lihat Gambar</a>
+                                    <a class="btn-warning form-control" type="hidden" href="{{ route('showImage', $pizza->image) }}">Lihat Gambar</a>
                                 @endif
-                                <input id="image" type="file" class="form-control"  name="image" required>
+                                <input id="image" type="file" class="form-control" name="image">
                             </div>
                         </div>
 

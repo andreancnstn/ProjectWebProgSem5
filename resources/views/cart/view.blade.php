@@ -6,7 +6,7 @@
         <div class="card m-3">
             <div class="d-flex p-3">
                 <div class="col-md-3">
-                    <img src="storage/{{ $pizzas->where('id', $cart->pizza_id)->first()->image }}" class="w-100">
+                    <img src="{{ Storage::url($pizzas->where('id', $cart->pizza_id)->first()->image) }}" class="w-100">
                 </div>
     
                 <div class="col-sm-4">

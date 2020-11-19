@@ -68,8 +68,6 @@ class TransactionController extends Controller
         $transacs = Transaction::where('created_at', $time)->get();
         $pizzas = Pizza::all();
 
-        // dd($transacs);
-
         return view('transaction.detail', compact('transacs', 'pizzas'));
     }
 

@@ -105,14 +105,20 @@ class PizzaController extends Controller
         $pizza = Pizza::find($request->id);
 
         $data = $this->validate($request, [
-            'pizza_name' => 'required|max:20',
+            'pizza_name' => 'required',
             'desc' => 'required|min:20',
             'price' => 'required|numeric|gt:10000',
-            'image' => 'required|file|image'
+            'image' => 'nullable|file|image'
         ]);
         
-        //make if klo ada foto atau engk
-        $image_path = $request->image->store('image', 'public');
+        if($request->hasFile('image')) {
+            $image_path = $request->image->store('image', 'public');
+            Storage::delete('public/'.$pizza->image);
+        }
+        else {
+            $image_path = $pizza->image;
+        }
+        
 
         $pizza->update(array_merge(
             $data,

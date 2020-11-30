@@ -21,6 +21,10 @@ class CreatePizzasTable extends Migration
             $table->string('image');
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => PizzasSeeder::class
+        ]);
     }
 
     /**

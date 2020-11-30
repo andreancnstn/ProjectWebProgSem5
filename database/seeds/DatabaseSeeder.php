@@ -12,7 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
-        $this->call(PizzaSeeder::class);
+        //GADIPAKAI LG, UDAH OTOMATIS KETIKA MIGRATE LGSUNG SEED
+        // $this->call(UserSeeder::class);
+        // $this->call(PizzaSeeder::class);
+
+        //HARAP LAKUKAN STEP DIBAWAH INI UNTUK NGESEED
+        // 1. composer dump-autoload
+        // 2. php artisan migrate
+
     }
 }

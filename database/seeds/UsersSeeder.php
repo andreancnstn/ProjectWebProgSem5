@@ -1,12 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Str;
 
-
-class UserSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +21,7 @@ class UserSeeder extends Seeder
             'gender' => 'Female',
             'role' => 'admin',
             // 'remember_token' => 'yes',
-            'created_at' => now()
+            'created_at' => now(),
         ]);
         DB::table('users')->insert([
             'name' => 'admin2',
@@ -37,7 +33,7 @@ class UserSeeder extends Seeder
             'gender' => 'Male',
             'role' => 'admin',
             // 'remember_token' => 'yes',
-            'created_at' => now()
+            'created_at' => now(),
         ]);
         DB::table('users')->insert([
             'name' => 'member1',
@@ -49,7 +45,7 @@ class UserSeeder extends Seeder
             'gender' => 'Male',
             'role' => 'member',
             // 'remember_token' => 'yes',
-            'created_at' => now()
+            'created_at' => now(),
         ]);
         DB::table('users')->insert([
             'name' => 'member2',
@@ -61,7 +57,7 @@ class UserSeeder extends Seeder
             'gender' => 'Female',
             'role' => 'member',
             // 'remember_token' => 'yes',
-            'created_at' => now()
+            'created_at' => now(),
         ]);
     }
 }

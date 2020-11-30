@@ -21,8 +21,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('admin1'),
             'address' => 'rumah admin1',
-            'phone' => '123456',
-            'gender' => 'admin1',
+            'phone' => '123456789',
+            'gender' => 'Female',
             'role' => 'admin',
             // 'remember_token' => 'yes',
             'created_at' => now()
@@ -31,23 +31,35 @@ class UserSeeder extends Seeder
             'name' => 'admin2',
             'email' => 'admin2@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin2'),//ini tadi kalo string doang gabisa dilogin, musti masukin udah versi di hash
+            'password' => Hash::make('admin2'),
             'address' => 'rumah admin2',
-            'phone' => '1234567',
-            'gender' => 'admin',
+            'phone' => '123456789',
+            'gender' => 'Male',
             'role' => 'admin',
-            // 'remember_token' => 'yes',//ini gimanah ya
+            // 'remember_token' => 'yes',
             'created_at' => now()
         ]);
         DB::table('users')->insert([
-            'name' => 'user1',
-            'email' => 'user1@gmail.com',//emailnya bisa gapake @gmail.com kalo masukin lewat seeder gini
+            'name' => 'member1',
+            'email' => 'member1@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('user1'),
-            'address' => 'rumah user1',
-            'phone' => '1234567',//phone kalo di UI minimal 9 angka tapi di seeder gini masih bisa
-            'gender' => 'user1',// ini jg bisa bukan male/female
-            'role' => 'user',
+            'password' => Hash::make('member1'),
+            'address' => 'rumah member1',
+            'phone' => '123456789',
+            'gender' => 'Male',
+            'role' => 'member',
+            // 'remember_token' => 'yes',
+            'created_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'name' => 'member2',
+            'email' => 'member2@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('member2'),
+            'address' => 'rumah member2',
+            'phone' => '123456789',
+            'gender' => 'Female',
+            'role' => 'member',
             // 'remember_token' => 'yes',
             'created_at' => now()
         ]);

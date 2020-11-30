@@ -41,6 +41,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    //override from AuthenticatesUsers (line 25)
     protected function sendLoginResponse(Request $request)
     {
         $rememberMeTokenCustomTime = 120;   //in minutes

@@ -44,7 +44,7 @@ Phizza Hut | Edit {{$pizza->pizza_name}}
                             <label for="price" class="col-md-4 col-form-label text-md-right">Price</label>
 
                             <div class="col-md-6">
-                                <input value="{{ $pizza->price }}" id="price" type="number" min="0" step="100" class="form-control"  name="price" required>
+                                <input value="{{ $pizza->price }}" id="price" type="number" min="10000" step="100" class="form-control"  name="price" required>
                             </div>
                         </div>
 

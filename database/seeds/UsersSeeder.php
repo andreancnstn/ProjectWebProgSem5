@@ -20,7 +20,6 @@ class UsersSeeder extends Seeder
             'phone' => '123456789',
             'gender' => 'Female',
             'role' => 'admin',
-            // 'remember_token' => 'yes',
             'created_at' => now(),
         ]);
         DB::table('users')->insert([
@@ -32,7 +31,6 @@ class UsersSeeder extends Seeder
             'phone' => '123456789',
             'gender' => 'Male',
             'role' => 'admin',
-            // 'remember_token' => 'yes',
             'created_at' => now(),
         ]);
         DB::table('users')->insert([
@@ -44,7 +42,6 @@ class UsersSeeder extends Seeder
             'phone' => '123456789',
             'gender' => 'Male',
             'role' => 'member',
-            // 'remember_token' => 'yes',
             'created_at' => now(),
         ]);
         DB::table('users')->insert([
@@ -56,7 +53,6 @@ class UsersSeeder extends Seeder
             'phone' => '123456789',
             'gender' => 'Female',
             'role' => 'member',
-            // 'remember_token' => 'yes',
             'created_at' => now(),
         ]);
     }

@@ -63,10 +63,6 @@ Phizza Hut | Home
                             <a href="{{ route('delete_pizza' , $pizza->id) }}">
                                 <button class="btn-danger ml-2 form-control">Delete Pizza</button>
                             </a>
-                            {{-- <form action="{{ route('delete_pizza', $pizza->id) }}" method="POST">
-                                @csrf
-                                <button class="btn-danger ml-2 form-control">Delete Pizza</button>
-                            </form> --}}
                         </div>
                         @endif
                     @endif

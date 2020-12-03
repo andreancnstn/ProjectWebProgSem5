@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['isLogin']], function() {
     Route::prefix('pizza')->group(function() {
         Route::group(['middleware' => ['forAdmin']], function () {

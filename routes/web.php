@@ -56,6 +56,10 @@ Route::group(['middleware' => ['isLogin']], function() {
     });
 });
 
+Route::get('/', function() {
+    return redirect()->route('home_pizza');
+});
+
 Route::prefix('pizza')->group(function() {
     Route::get('/home', 'PizzaController@index')->name('home_pizza');
     Route::get('/detail/{id}', 'PizzaController@show')->name('show_pizza');
